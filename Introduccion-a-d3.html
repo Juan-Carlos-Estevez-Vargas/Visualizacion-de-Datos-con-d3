@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <script>
+      /**
+       *  Método select para seleccionar componentes HTML específicos
+       *  Método append para agregar componentes HTML
+       *  Método text para agregar texto a los componentes HTML
+       */
+      d3.select("body").append("h1").text("Learning D3");
+
+      /**
+       *  Método selectAll para seleccionar todos los componentes HTML de una etiqueta específica
+       */
+      d3.selectAll("li").text("list item");
+
+      /**
+       *  Seleccionamos el body, y después, seleccionados todos los elementos h2, en caso de no
+       *  haberlos los crea; posteriormente, creamos un array de datos y los pasamos al objeto
+       *  d3 con el método data y con el método enter pasamos a agregar varios h2 según sea el
+       *  tamaño del conjunto de datos, y a cada h2 le agregamos el texto correspondiente al
+       *  array de datos más la cadena " USD"
+       *
+       *  Con d3 es posible asignar estilos CSS, en este caso con el método style asignamos que
+       *  todo nuestro documento tenga un font-family de tipo verdana
+       */
+      const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+      d3.select("body")
+        .selectAll("h2")
+        .data(dataset)
+        .enter()
+        .append("h2")
+        .text((data) => data + " USD")
+        .style("font-family", "verdana")
+        .style("color", (d) => {
+          if (d < 20) {
+            return "red";
+          } else {
+            return "green";
+          }
+        });
+    </script>
+  </body>
+</html>
