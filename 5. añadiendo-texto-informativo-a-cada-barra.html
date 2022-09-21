@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adición de texto informativo a cada barra de la gráfica</title>
+  </head>
+  <body>
+    <script>
+      const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+      const w = 500;
+      const h = 100;
+
+      const svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+      svg
+        .selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => i * 30)
+        .attr("y", (d, i) => h - 3 * d)
+        .attr("width", 25)
+        .attr("height", (d, i) => 3 * d)
+        .attr("fill", "navy");
+
+      /**
+       * A cada elemento del dataset le agregaremos un texto representativo,
+       * para ello, ubicamos las coordenadas x igual que las barras y las
+       * coordenadas y 3 unidades arriba de donde termina la barra.
+       *
+       * Finalmente añadimos el texto del dato iterado del dataset a cada
+       * atributo de tipo text.
+       */
+      svg
+        .selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("x", (d, i) => i * 30)
+        .attr("y", (d, i) => h - 3 * d - 3)
+        .text((d, i) => d);
+    </script>
+  </body>
+</html>
