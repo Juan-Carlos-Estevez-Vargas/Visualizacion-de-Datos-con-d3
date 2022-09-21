@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inversión de gráficas SVG</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <script>
+      /**
+       * Al crear una gráfica de barras por defecto se ubica en orden inverso,
+       * para invertirla y que se vea de manera correcta realizaremos los
+       * siguientes pasos:
+       */
+
+      // Dataset con los valores a utilizar
+      const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+      // Width y height del SVG definidos estáticamente.
+      const w = 500;
+      const h = 100;
+
+      /**
+       * Capturando el body del documento, agregando la etiqueta SVG y setenado el
+       * tamaño del mismo con los atributos width y height.
+       */
+      const svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+      /**
+       * Seleccionando o creando todos los objetos de tipo rectángulo, para irlos
+       * agregando según el tamaño de datos del dataset; asignamos los valore x e y
+       * para los rectángulos que pintarán nuestra gráfica de barras, para ello,
+       * en X para cada dato devolvemos su índice por 30 (esto para visualizar mejor
+       * gráficas), a Y le asignamos un valor de la altura menos 3 veces el valor del
+       * punto o dato analizado.
+       *
+       * Finalmente, definimos el width y height de cada elemento.
+       */
+      svg
+        .selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => i * 30)
+        .attr("y", (d, i) => h - 3 * d)
+        .attr("width", 25)
+        .attr("height", (d, i) => 3 * d);
+    </script>
+  </body>
+</html>
